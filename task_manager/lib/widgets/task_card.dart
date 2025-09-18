@@ -71,7 +71,7 @@ class _CardItemProjectState extends State<CardItemProject>
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
         decoration: BoxDecoration(
-          gradient: Colorgradient.getByName('Forest'),
+          gradient: Colorgradient.getByName('Evening sunset'),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Column(
@@ -84,6 +84,7 @@ class _CardItemProjectState extends State<CardItemProject>
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
+                  color: Colors.white
                 ),
               ),
               trailing: RotationTransition(
@@ -109,7 +110,11 @@ class _CardItemProjectState extends State<CardItemProject>
                           alignment: AlignmentGeometry.centerLeft,
                           child: Text(
                             'Description',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 24,
+                              ),
                           ),
                         ),
                         SizedBox(height: 8),
@@ -117,6 +122,10 @@ class _CardItemProjectState extends State<CardItemProject>
                           alignment: AlignmentGeometry.centerLeft,
                           child: Text(
                             'Ваш длинный текст здесь...fdglkjdfglkjglkdfjglkdjglkdfjglkdjglkdjglkdjgdlkjgdlkjgdlkgjdlgkjdflkgkdjfglkdfjglkfdjglkdfjglkdfjglkdfjglkdfjglk',
+                            style: TextStyle(
+                              color: Colors.grey[400],
+                              fontSize: 18,
+                            ),
                             softWrap: true, 
                             overflow: TextOverflow.visible, 
                           ),
@@ -141,13 +150,20 @@ class _CardItemProjectState extends State<CardItemProject>
                                   Text(
                                     'Status',
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 5), // Вместо spacing
-                                  Text('В процессе'),
+
+                                  SizedBox(height: 2), 
+                                 
+                                  Text('В процессе',
+                                    style: TextStyle(
+                                      color: Colors.grey[400],
+                                      fontSize: 18,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -157,16 +173,22 @@ class _CardItemProjectState extends State<CardItemProject>
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    'Priority',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                Text(
+                                  'Priority',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                SizedBox(height: 2), 
+
+                                Text('data',style: TextStyle(
+                                      color: Colors.grey[400],
+                                      fontSize: 18,
                                     ),
                                   ),
-                                  SizedBox(height: 5), // Вместо spacing
-                                  Text('data'),
                                 ],
                               ),
                             ),

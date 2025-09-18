@@ -47,6 +47,22 @@ class Colorgradient
       name: 'SmoothMulticolor',
       colors: [Color(0xFF0b8793), Color(0xFF204d69),Color(0xFF2c1a47),Color(0xFF2c1a47)],
     ),
+    Colorgradient(
+      name: 'SmoothMulticolor',
+      colors: [Color(0xFF0b8793), Color(0xFF204d69),Color(0xFF2c1a47),Color(0xFF2c1a47)],
+    ),
+    Colorgradient(
+      name: 'Evening sunset',
+      colors: [Color(0xFF0b8793), Color(0xFF1a4e8e), Color(0xFF360033)],
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+    ),
+    Colorgradient(
+      name: 'Golden gradient',
+      colors: [Color(0xFFFFD700), Color(0xFFFFBF00)],
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+    ),
   ];
 
   // Метод для получения градиента по индексу

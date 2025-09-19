@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:task_manager/widgets/task_card.dart';
-
+//Data
 import 'package:task_manager/models/TestData.dart';
+//Enum
+import 'package:task_manager/models/enums/TaskStatus.dart';
+import 'package:task_manager/models/enums/TaskPriority.dart';
+
 
 class BodyTask extends StatefulWidget {
   const BodyTask({super.key});
@@ -13,13 +16,13 @@ class BodyTask extends StatefulWidget {
 
 class _BodyTaskState extends State<BodyTask> {
   final List<Testdata> _testData = [
-    Testdata(name: 'Test 1', id: 1),
-    Testdata(name: 'Test 2', id: 2),
-    Testdata(name: 'Test 3', id: 3),
-    Testdata(name: 'Test 4', id: 4),
-    Testdata(name: 'Test 5', id: 5),
-    Testdata(name: 'Test 6', id: 6),
-    Testdata(name: 'Test 7', id: 7),
+    Testdata(name: 'Test 1', id: 1, status: TaskStatus.archived, priority: Taskpriority.average, dateTime: DateTime(2025,12,10), description: 'lhfdsdljkfhdslkjhfdslkjhfsdkjhfdskjfhsdkjfh'),
+    Testdata(name: 'Test 2', id: 2, status: TaskStatus.completed, priority: Taskpriority.high, dateTime: DateTime(1099,5,27), description: 'dsfsdfklsdhflkjsd'),
+    Testdata(name: 'Test 3', id: 3, status: TaskStatus.inProgress, priority: Taskpriority.high, dateTime: DateTime(4545,8,15), description: 'dsfkjsdflkjhdskljfhsdoljkfhsdlkfjhsdkjfhdskjfhsdkjfhkjsdhfkjsdfhsd'),
+    Testdata(name: 'Test 4', id: 4, status: TaskStatus.inProgress, priority: Taskpriority.high, dateTime: DateTime(2022,9,20), description: 'skdjhfksjdhfkjsdhfdkjsdhf'),
+    Testdata(name: 'Test 5', id: 5, status: TaskStatus.inProgress, priority: Taskpriority.short, dateTime: DateTime(2014,7,8), description: 'dsfkjjsdhgfkjsdhfkj'),
+    Testdata(name: 'Test 6', id: 6, status: TaskStatus.pending, priority: Taskpriority.short, dateTime: DateTime(2018,12,31),description: 'sdf'),
+    Testdata(name: 'Test 7', id: 7, status: TaskStatus.pending, priority: Taskpriority.average,dateTime: DateTime(2002,4,12), description: 'sdkljfsdlkjflksdjflksdjflsdkjflskdjflskdjfsldk'),
   ];
   
   @override

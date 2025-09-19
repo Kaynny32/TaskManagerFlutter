@@ -4,6 +4,7 @@ import 'package:task_manager/widgets/bottom_navigation_bar.dart';
 //Body
 import 'package:task_manager/widgets/body_settings.dart';
 import 'package:task_manager/widgets/body_task.dart';
+import 'package:task_manager/widgets/body_add_task.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,10 +28,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     _pages = [
       BodyTask(),
-      BodySettings(),
+      BodyAddTask(),
+      BodySettings(),      
     ];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
 
       body: Stack(
         children: [

@@ -42,14 +42,25 @@ class _ButtonNavigationBarCustomState extends State<ButtonNavigationBarCustom> {
                   icon: Icon(Icons.task_outlined,size: 35,color: widget.currentIndex == 0? Colors.white:  Colors.grey,)
                   )
                 ),
+                
                 Expanded(
                   child: IconButton(
                     onPressed: (){
                       widget.onTabChanged(1);
                     }, 
-                    icon: Icon(Icons.settings,size: 35,color: widget.currentIndex == 1? Colors.white:  Colors.grey,),
+                    icon: Icon(Icons.add_circle_outline_outlined,size: 35,color: widget.currentIndex == 1? Colors.white:  Colors.grey,),
                   ) 
                 ),
+
+                Expanded(
+                  child: IconButton(
+                    onPressed: (){
+                      widget.onTabChanged(2);
+                    }, 
+                    icon: Icon(Icons.settings,size: 35,color: widget.currentIndex == 2? Colors.white:  Colors.grey,),
+                  ) 
+                ),
+                
               ],
             ),
           ),

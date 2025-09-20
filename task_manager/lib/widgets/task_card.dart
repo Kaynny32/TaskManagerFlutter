@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/models/TestData.dart';
+
 import 'package:task_manager/models/ColorGradient.dart';
-import 'package:task_manager/models/enums/TaskStatus.dart';
+import 'package:task_manager/models/TaskData.dart';
 
 class CardItemProject extends StatefulWidget {
-  final Testdata testdata;
+  final TaskData task;
   final Function(TaskStatus)? onStatusChanged;
   
   const CardItemProject({
     super.key,
-    required this.testdata,
+    required this.task,
     this.onStatusChanged,
   });
 
@@ -28,7 +28,7 @@ class _CardItemProjectState extends State<CardItemProject>
   @override
   void initState() {
     super.initState();
-    _currentStatus = widget.testdata.status;
+    _currentStatus = widget.task.status;
     
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
@@ -123,7 +123,7 @@ class _CardItemProjectState extends State<CardItemProject>
             // Заголовок карточки
             ListTile(          
               title: Text(
-                widget.testdata.name,
+                widget.task.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -163,7 +163,7 @@ class _CardItemProjectState extends State<CardItemProject>
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            widget.testdata.description,
+                            widget.task.description,
                             style: TextStyle(
                               color: Colors.grey[400],
                               fontSize: 18,
@@ -195,7 +195,7 @@ class _CardItemProjectState extends State<CardItemProject>
 
                         Align(
                         alignment: AlignmentGeometry.center,
-                        child: Text('${widget.testdata.dateTime.year}.${widget.testdata.dateTime.month}.${widget.testdata.dateTime.day}', 
+                        child: Text(widget.task.dateTime.toString(), 
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -271,7 +271,7 @@ class _CardItemProjectState extends State<CardItemProject>
                                   ),
                                   const SizedBox(height: 2), 
                                   Text(
-                                    widget.testdata.priority.name,
+                                    widget.task.priority.name,
                                     style: TextStyle(
                                       color: Colors.grey[400],
                                       fontSize: 18,

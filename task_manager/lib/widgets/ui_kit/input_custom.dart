@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class InputCustom extends StatefulWidget {
   final String nameInput;
   final TextEditingController textEditingController;
+  final ValueChanged<String>? onChanged;
   
   const InputCustom(
     {
       super.key,
       required this.nameInput,
       required this.textEditingController,
+      this.onChanged,
     }
   );
 
@@ -30,6 +32,7 @@ class _InputCustomState extends State<InputCustom> {
               width: 300,
               height: 75,
               child: TextFormField(
+                onChanged: widget.onChanged,
                 controller: widget.textEditingController,
                 cursorColor: Colors.white,
                 decoration: InputDecoration(

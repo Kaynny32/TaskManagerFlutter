@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:task_manager/models/ColorGradient.dart';
 import 'package:task_manager/models/TaskData.dart';
+import 'package:task_manager/services/task_data_base.dart';
+import 'package:provider/provider.dart';
 
 class CardItemProject extends StatefulWidget {
   final TaskData task;
@@ -108,6 +110,61 @@ class _CardItemProjectState extends State<CardItemProject>
     });
   }
 
+  // Метод для удаления задачи
+  void _deleteTask(BuildContext context) async {
+    final taskDatabase = Provider.of<TaskDataBase>(context, listen: false);
+    
+    //Диалог подтверждения
+    bool confirmDelete = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Delete', style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.grey[900],
+          content: Text('Are you sure you want to delete this task?', 
+            style: TextStyle(color: Colors.white70)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Cancel', style: TextStyle(color: Colors.blue)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Delete', style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
+
+    if (confirmDelete) {
+      try {
+        await taskDatabase.deleteTask(widget.task.id);
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.green,
+            content: Text('Task deleted successfully!', 
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            duration: Duration(seconds: 2),
+          ),
+        );
+        
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Error deleting task: $e', 
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -179,29 +236,29 @@ class _CardItemProjectState extends State<CardItemProject>
                     //Date
                     Column(
                       children: [
-                        
                         Align(
-                        alignment: AlignmentGeometry.center,
-                        child: Text('Date', 
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                          alignment: Alignment.center,
+                          child: Text('Date', 
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
 
                         SizedBox(height: 5,),
 
                         Align(
-                        alignment: AlignmentGeometry.center,
-                        child: Text(widget.task.dateTime.toString(), 
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${widget.task.dateTime.day}.${widget.task.dateTime.month}.${widget.task.dateTime.year}',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                        ),                        
+                          ),                        
                       ],
                     ),
                     
@@ -283,6 +340,28 @@ class _CardItemProjectState extends State<CardItemProject>
                           ],
                         )
                       ],
+                    ),
+                    SizedBox(height: 25,),
+
+                    // Кнопка удаления
+                    SizedBox(
+                      width: 150,
+                      height: 50,                      
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.red),
+                        ),
+                        onPressed: () {
+                          _deleteTask(context); 
+                        }, 
+                        child: Row(
+                          children: [
+                            Icon(Icons.delete_forever_outlined, color: Colors.white, size: 25),
+                            SizedBox(width: 5),
+                            Text('Delete', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),

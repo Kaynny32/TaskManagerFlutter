@@ -11,14 +11,16 @@ class BodyTask extends StatefulWidget {
 }
 
 class _BodyTaskState extends State<BodyTask> {
+  void load() async
+  {
+    final taskDatabase = Provider.of<TaskDataBase>(context, listen: false);
+    await taskDatabase.fetchTasks();
+  }
+  
   @override
   void initState() {
-    super.initState();
-    // Загружаем задачи при инициализации
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final taskDatabase = Provider.of<TaskDataBase>(context, listen: false);
-      taskDatabase.loadTasks();
-    });
+    super.initState();    
+    load();
   }
 
   @override
@@ -49,7 +51,7 @@ class _BodyTaskState extends State<BodyTask> {
                       Expanded(
                         flex: 2,
                         child: Text(
-                          'My Tasks (${tasks.length})',
+                          'My Tasks',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -66,8 +68,8 @@ class _BodyTaskState extends State<BodyTask> {
                 height: 25,
                 color: Colors.white,
                 thickness: 1,
-                indent: 65,
-                endIndent: 65,
+                indent: 150,
+                endIndent: 150,
               ),
 
               Center(

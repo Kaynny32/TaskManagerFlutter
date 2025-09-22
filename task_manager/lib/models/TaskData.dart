@@ -1,7 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:flutter/material.dart';
 
-part 'TaskData.g.dart'; // Убедитесь, что имя совпадает
+part 'TaskData.g.dart';
 
 @collection
 class TaskData {
@@ -46,13 +46,13 @@ enum TaskStatus {
   String get displayName {
     switch (this) {
       case TaskStatus.pending:
-        return 'Ожидает';
+        return 'Waiting';
       case TaskStatus.inProgress:
-        return 'В процессе';
+        return 'In progress';
       case TaskStatus.completed:
-        return 'Завершена';
+        return 'Completed';
       case TaskStatus.archived:
-        return 'В архиве';
+        return 'In the archive';
     }
   }
   
@@ -94,11 +94,11 @@ enum TaskPriority {
   String get displayName {
     switch (this) {
       case TaskPriority.low:
-        return 'Низкий';
+        return 'Short';
       case TaskPriority.medium:
-        return 'Средний';
+        return 'Average';
       case TaskPriority.high:
-        return 'Высокий';
+        return 'High';
     }
   }
   

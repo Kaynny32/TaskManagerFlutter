@@ -7,8 +7,9 @@ import 'package:task_manager/services/task_data_base.dart';
 import 'package:task_manager/pages/home_page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-   //await TaskDataBase.initialize();
+  await TaskDataBase.initialize();
   
   runApp(
     ChangeNotifierProvider(

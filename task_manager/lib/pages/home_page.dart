@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/models/ColorGradient.dart';
 import 'package:task_manager/widgets/bottom_navigation_bar.dart';
 //Body
-import 'package:task_manager/widgets/body_settings.dart';
+//import 'package:task_manager/widgets/body_settings.dart';
 import 'package:task_manager/widgets/body_task.dart';
 import 'package:task_manager/widgets/body_add_task.dart';
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     _pages = [
       BodyTask(),
       BodyAddTask(),
-      BodySettings(),      
+      //BodySettings(),      
     ];
 
     return Scaffold(

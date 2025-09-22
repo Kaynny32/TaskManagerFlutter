@@ -3,6 +3,8 @@ import 'package:task_manager/models/TaskData.dart';
 import 'package:task_manager/widgets/ui_kit/input_custom.dart';
 import 'package:task_manager/widgets/ui_kit/table_calendar_custom.dart';
 import 'package:task_manager/widgets/ui_kit/dropdown_custom.dart';
+import 'package:task_manager/services/task_data_base.dart';
+import 'package:provider/provider.dart';
 
 class BodyAddTask extends StatefulWidget {
   const BodyAddTask({super.key});
@@ -75,7 +77,7 @@ class _BodyAddTaskState extends State<BodyAddTask> {
             ),
           ),
 
-          Divider(height: 25, color: Colors.white, thickness: 1, indent: 65, endIndent: 65),
+          Divider(height: 25, color: Colors.white, thickness: 1, indent: 150, endIndent: 150),
 
           SizedBox(height: 25),
 
@@ -151,9 +153,8 @@ class _BodyAddTaskState extends State<BodyAddTask> {
                   ),
                 ),
               ),
-              onPressed: isActiveButton ? () {
-                // Действие при нажатии на активную кнопку
-                _addTask();
+              onPressed: isActiveButton ? () {                
+                _addTask(context);
               } : null, 
               child: Row(
                 children: [
@@ -169,22 +170,54 @@ class _BodyAddTaskState extends State<BodyAddTask> {
     );
   }
 
-  void _addTask() {
-    // Здесь ваша логика добавления задачи
-    print('Добавляем задачу:');
-    print('Название: ${taskNameController.text}');
-    print('Описание: ${taskDescriptionController.text}');
-    print('Дата: $_selectedDate');
-    print('Приоритет: $selectedPriority');
-    print('Статус: $selectedStatus');
-    
-    // Можно показать Snackbar или выполнить навигацию
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.grey.shade500,
-        content: Text('Task "${taskNameController.text}" Add!', style: TextStyle(color: Colors.green, fontSize: 22),),
-        duration: Duration(seconds: 2),
-      ),
-    );
+  void _addTask(BuildContext context) async {
+    if (!_checkAllFields()) return;
+
+    final taskDatabase = Provider.of<TaskDataBase>(context, listen: false);
+
+    final int idTask = DateTime.now().millisecondsSinceEpoch;
+
+    try {
+      await taskDatabase.addTask(
+        idTask,
+        taskNameController.text,
+        taskDescriptionController.text,
+        selectedStatus!,
+        selectedPriority!,
+        _selectedDate!,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          
+          backgroundColor: Colors.transparent,
+            content: Icon(Icons.check, color: Colors.green,size: 45,),
+          duration: Duration(microseconds: 900),
+        ),
+      );
+
+      taskNameController.clear();
+      taskDescriptionController.clear();
+      setState(() {
+        _selectedDate = null;
+        selectedPriority = null;
+        selectedStatus = null;
+        isActiveButton = false;
+      });
+
+      FocusScope.of(context).unfocus();
+
+    } catch (e) {
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Error adding task: $e', 
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    }
   }
 }
